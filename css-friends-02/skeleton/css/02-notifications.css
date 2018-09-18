@@ -1,0 +1,32 @@
+/* PHASE 2: Notifications */
+.badge {
+  background-color: black;
+  border-radius: 100%;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+
+.badge {
+  position:   sticky;
+
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+.badge ul:hover {
+  position: absolute;
+  z-index: 999;
+  color: green;
+}
+
+
+.header-list li:hover .hidden {
+  display: block;
+  color: pink;
+  position: absolute;
+}
