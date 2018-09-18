@@ -9,7 +9,7 @@ class User < ApplicationRecord
   
   has_many :posts
   
-  has_many :subs
+  has_many :subs,
     foreign_key: :user_id,
     class_name: "Sub"
   

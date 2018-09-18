@@ -3,15 +3,16 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @sub = Sub.find(params[:sub_id])
   end 
   
   def create 
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.sub_id = params[:sub_id] 
+    #@post.sub_id = params[:sub_id] 
     
     if @post.save
-      # redirect_topo
+      redirect_to post_url(@post)
     else 
       flash[:errors] = @post.errors.full_messages 
       render :new 
@@ -20,6 +21,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    # @sub = @post.subs.find(params[:id])
   end 
   
   def edit
@@ -30,7 +32,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
     
     if @post.update_attributes(post_params)
-      #redirect_to
+      redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
       render :edit 
@@ -38,7 +40,7 @@ class PostsController < ApplicationController
   end 
   
   def post_params
-    params.require(:post).permit(:title, :description, :content)
+    params.require(:post).permit(:title, :content, sub_ids: [])
   end 
   
 end 

@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   
-  validates :title, presence:true
+  validates :title, :content, presence:true
   
-  belongs_to :sub 
+  has_many :postsubs, dependent: :destroy, inverse_of: :post
+  has_many :subs, through: :postsubs, source: :sub 
   belongs_to :user
   
   

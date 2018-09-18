@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_creds(params[:user][:username], params[:user][:password])
     if @user
       login(@user)
-      # redirect_to
+      redirect_to subs_url
     else
       flash.now[:errors] = ["wroong invalid something dude"]
       render :new
