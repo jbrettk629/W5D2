@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end 
   
   def create 
+    debugger
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     #@post.sub_id = params[:sub_id] 
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_url(@post)
     else 
-      flash[:errors] = @post.errors.full_messages 
+      flash.now[:errors] = ["Sub_ids #{post_params[:sub_ids]}"]       #@post.errors.full_messages 
       render :new 
     end 
   end 
@@ -40,7 +41,7 @@ class PostsController < ApplicationController
   end 
   
   def post_params
-    params.require(:post).permit(:title, :content, sub_ids: [])
+    params.require(:post).permit(:title, :content, :url, sub_ids: [])
   end 
   
 end 
